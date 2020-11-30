@@ -33,19 +33,29 @@ function solution(name)
 	project(name)
 	configureProject(path.getdirectory(calleePath) .. '/Solution/')
     kind "ConsoleApp"
+    links {
+    	'Common'
+    }
 end
 
 function benchmark(name)
 	local calleePath = debug.getinfo(2, "S").source:sub(2)
 	project(name .. "_Benchmark")
 	configureProject(path.getdirectory(calleePath) .. '/Benchmark/')
-    kind "SharedLib"
+    kind "ConsoleApp"
+    nuget {
+    	'BenchmarkDotNet:0.12.1',
+    }
+    links {
+    	'Common',
+    	name
+    }
 end
 
 function wpf(name)
 	local calleePath = debug.getinfo(2, "S").source:sub(2)
-	project(name .. "_Benchmark")
-	configureProject(path.getdirectory(calleePath) .. '/Benchmark/')
+	project(name .. "_Wpf")
+	configureProject(path.getdirectory(calleePath) .. '/WPF/')
     kind "WindowedApp"
 	flags {
 		'WPF',    		
@@ -55,4 +65,9 @@ function wpf(name)
 		"ReactiveUI.WPF:12.1.5",
 		"ReactiveUI.Events.WPF:12.1.5"
 	}
+    links {
+    	'Common',
+    	name
+    }
+
 end
