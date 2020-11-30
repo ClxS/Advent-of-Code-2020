@@ -1,0 +1,1 @@
+Build\premake5.exe vs2019 --file="Build/premake5.lua"

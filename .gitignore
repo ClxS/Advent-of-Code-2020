@@ -21,7 +21,7 @@ nupkg/
 [Rr]eleases/
 x64/
 x86/
-build/
+"^Build/
 !Source/Build
 bld/
 [Bb]in/
@@ -33,6 +33,7 @@ msbuild.wrn
 
 # C#
 *.csproj
+*.sln
 
 # Visual Studio
 .vs/
