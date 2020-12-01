@@ -15,7 +15,7 @@
             this.inputs = inputs;
         }
 
-        public string Name => "Day1 Part2 Int Buckets";
+        public string Name => "Day1 Part2 Int Buckets Stackalloc";
 
         public void Solve()
         {
