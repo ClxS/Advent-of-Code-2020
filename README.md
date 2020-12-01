@@ -1,4 +1,4 @@
-# Advent-of-Code-2020
+# Advent of Code 2020
 
 Here's my Advent of Code solutions for 2020.
 Below are the daily benchmarks. These probably will be tiny for the first half the days.
