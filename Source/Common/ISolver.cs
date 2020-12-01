@@ -6,6 +6,6 @@
     {
         string Name { get; }
 
-        Task SolveAsync();
+        void Solve();
     }
 }

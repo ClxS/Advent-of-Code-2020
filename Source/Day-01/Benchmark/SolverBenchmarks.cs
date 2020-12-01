@@ -9,18 +9,14 @@
     public class SolverBenchmarks
     {
         [Benchmark]
-        public async Task Part1Async()
+        public void Part1()
         {
-            await ProgramShell
-                .RunSilentAsync(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
-                .ConfigureAwait(false);
+            ProgramShell.RunSilent(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")));
         }
         [Benchmark]
-        public async Task Part2Async()
+        public void Part2()
         {
-            await ProgramShell
-                .RunSilentAsync(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
-                .ConfigureAwait(false);
+            ProgramShell.RunSilent(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")));
         }
     }
 }

@@ -17,7 +17,7 @@
 
         public string Name => "Day1 Part2";
 
-        public Task SolveAsync()
+        public void Solve()
         {
             for (int i = 0; i < this.inputs.Length; i++)
             {
@@ -32,8 +32,6 @@
                     }
                 }
             }
-
-            return Task.CompletedTask;
         }
     }
 }
