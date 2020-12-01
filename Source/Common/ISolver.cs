@@ -4,6 +4,8 @@
 
     public interface ISolver
     {
+        string Name { get; }
+
         Task SolveAsync();
     }
 }

@@ -15,6 +15,8 @@
             this.inputs = inputs;
         }
 
+        public string Name => "Day1 Part1";
+
         public Task SolveAsync()
         {
             for (int i = 0; i < this.inputs.Length; i++)

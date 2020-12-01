@@ -10,14 +10,10 @@ namespace Day1
     {
         public static async Task Main()
         {
-            Log.Information("Part 1");
             await ProgramShell
-                .RunAsync(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
-                .ConfigureAwait(false);
-
-            Log.Information("Part 2");
-            await ProgramShell
-                .RunAsync(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
+                .RunAsync(
+                    new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")),
+                    new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
                 .ConfigureAwait(false);
         }
     }

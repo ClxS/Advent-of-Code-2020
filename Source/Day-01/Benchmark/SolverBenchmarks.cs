@@ -12,14 +12,14 @@
         public async Task Part1Async()
         {
             await ProgramShell
-                .RunAsync(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
+                .RunSilentAsync(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
                 .ConfigureAwait(false);
         }
         [Benchmark]
         public async Task Part2Async()
         {
             await ProgramShell
-                .RunAsync(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
+                .RunSilentAsync(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
                 .ConfigureAwait(false);
         }
     }
