@@ -29,6 +29,7 @@
                         if (this.inputs[i] + this.inputs[j] + this.inputs[k] == this.target)
                         {
                             Log.Information("Match: {A} * {B} * {C} = {D}", this.inputs[i], this.inputs[j], this.inputs[k], this.inputs[i] * this.inputs[j] * this.inputs[k]);
+                            return;
                         }
                     }
                 }

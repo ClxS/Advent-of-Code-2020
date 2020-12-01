@@ -42,6 +42,7 @@
                     }
 
                     Log.Information("Match: {A} * {B} * {C} = {D}", this.inputs[i], this.inputs[j], requiredValue, this.inputs[i] * this.inputs[j] * requiredValue);
+                    return;
                 }
             }
         }

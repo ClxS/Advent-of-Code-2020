@@ -23,15 +23,18 @@
 
             for (int i = 0; i < length; i++)
             {
+                var iValue = this.inputs[i];
                 for (int j = i + 1; j < length; j++)
                 {
-                    var requiredValue = this.target - (this.inputs[i] + this.inputs[j]);
+                    var jValue = this.inputs[j];
+                    var requiredValue = this.target - (iValue + jValue);
                     if (!store.Contains(requiredValue))
                     {
                         continue;
                     }
 
-                    Log.Information("Match: {A} * {B} * {C} = {D}", this.inputs[i], this.inputs[j], requiredValue, this.inputs[i] * this.inputs[j] * requiredValue);
+                    Log.Information("Match: {A} * {B} * {C} = {D}", iValue, jValue, requiredValue, iValue * jValue * requiredValue);
+                    return;
                 }
             }
         }
