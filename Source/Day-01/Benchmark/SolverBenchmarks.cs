@@ -1,15 +1,26 @@
 ﻿namespace Day1_Benchmark
 {
     using BenchmarkDotNet.Attributes;
+    using Common;
+    using Day1;
     using System.Threading.Tasks;
 
     [MemoryDiagnoser]
     public class SolverBenchmarks
     {
         [Benchmark]
-        public Task Part1Async()
+        public async Task Part1Async()
         {
-            return Task.CompletedTask;
+            await ProgramShell
+                .RunAsync(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
+                .ConfigureAwait(false);
+        }
+        [Benchmark]
+        public async Task Part2Async()
+        {
+            await ProgramShell
+                .RunAsync(new Part2Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")))
+                .ConfigureAwait(false);
         }
     }
 }
