@@ -1,7 +1,7 @@
 local function configureProject(path)
 	location(path)
 	language "C#"
-	dotnetframework 'netcoreapp3.1'
+	dotnetframework 'net5.0'
     architecture "universal"
 	enabledefaultcompileitems(true)
 	nuget {
