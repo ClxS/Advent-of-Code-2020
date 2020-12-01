@@ -8,11 +8,19 @@ local function configureProject(path)
     	"Serilog:2.10.0",
     	"Serilog.Sinks.File:4.1.0",
     	"Serilog.Sinks.Console:3.1.1",
+		'Serilog.Sinks.Debug:1.0.1',
     }
     analyzers {
     	"Roslynator.Analyzers:3.0.0",
     	"Microsoft.VisualStudio.Threading.Analyzers:16.0.102",
     }
+
+	files {
+		path .. '/Inputs/**',
+	}
+	filter {"files:**/Inputs/**"}
+		buildaction "Copy"
+	filter {}
 end
 
 function common(name, isWpf)
