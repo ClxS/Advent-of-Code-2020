@@ -13,7 +13,8 @@ namespace Day1
                     new Part2Solver(2020, data),
                     new Part2SolverHashSet(2020, data),
                     new Part2SolverIntBuckets(2020, data),
-                    new Part2SolverIntBucketsStackalloc(2020, data));
+                    new Part2SolverIntBucketsStackalloc(2020, data),
+                    new Part3Solver(2020, data));
         }
     }
 }
