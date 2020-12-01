@@ -33,5 +33,11 @@
         {
             ProgramShell.RunSilent(new Part2SolverHashSet(2020, this.data));
         }
+
+        [Benchmark]
+        public void Part2IntBuckets()
+        {
+            ProgramShell.RunSilent(new Part2SolverIntBuckets(2020, this.data));
+        }
     }
 }

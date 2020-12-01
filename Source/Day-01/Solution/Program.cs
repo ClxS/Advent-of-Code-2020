@@ -11,7 +11,8 @@ namespace Day1
                 .Run(
                     new Part1Solver(2020, data),
                     new Part2Solver(2020, data),
-                    new Part2SolverHashSet(2020, data));
+                    new Part2SolverHashSet(2020, data),
+                    new Part2SolverIntBuckets(2020, data));
         }
     }
 }
