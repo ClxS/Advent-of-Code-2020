@@ -27,5 +27,11 @@
         {
             ProgramShell.RunSilent(new Part2Solver(2020, this.data));
         }
+
+        [Benchmark]
+        public void Part2HashSet()
+        {
+            ProgramShell.RunSilent(new Part2SolverHashSet(2020, this.data));
+        }
     }
 }
