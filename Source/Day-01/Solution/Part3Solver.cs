@@ -20,14 +20,13 @@
         public void Solve()
         {
             var length = this.inputs.Length;
-            var kAndlPairs = new List<int>();
+            var kAndlPairs = new List<int>(GetTriangleNumber(this.inputs.Length));
 
-            var insertIdx = 0;
             for (int i = 0; i < length; i++)
             {
                 for (int j = i + 1; j < length; j++)
                 {
-                    kAndlPairs[insertIdx++] = this.inputs[i] + this.inputs[j];
+                    kAndlPairs.Add(this.inputs[i] + this.inputs[j]);
                 }
             }
 
@@ -45,6 +44,17 @@
                     Log.Information("Match: {A} * {B} * {C} = {D}", this.inputs[i], this.inputs[j], requiredValue, this.inputs[i] * this.inputs[j] * requiredValue);
                 }
             }
+        }
+
+        private int GetTriangleNumber(int length)
+        {
+            int result = 0;
+            for (int i = length; i > 0; i--)
+            {
+                result += i;
+            }
+
+            return result;
         }
     }
 }
