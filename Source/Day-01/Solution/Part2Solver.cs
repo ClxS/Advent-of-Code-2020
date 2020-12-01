@@ -4,12 +4,12 @@
     using Serilog;
     using System.Threading.Tasks;
 
-    internal class Part1Solver : ISolver
+    internal class Part2Solver : ISolver
     {
         private readonly int target;
         private readonly int[] inputs;
 
-        public Part1Solver(int target, params int[] inputs)
+        public Part2Solver(int target, params int[] inputs)
         {
             this.target = target;
             this.inputs = inputs;
@@ -21,9 +21,12 @@
             {
                 for (int j = i + 1; j < this.inputs.Length; j++)
                 {
-                    if (this.inputs[i] + this.inputs[j] == this.target)
+                    for (int k = j + 1; k < this.inputs.Length; k++)
                     {
-                        Log.Information("Match: {D} * {E} = {F}", this.inputs[i], this.inputs[j], this.inputs[i] * this.inputs[j]);
+                        if (this.inputs[i] + this.inputs[j] + this.inputs[k] == this.target)
+                        {
+                            Log.Information("Match: {A} * {B} * {C} = {D}", this.inputs[i], this.inputs[j], this.inputs[k], this.inputs[i] * this.inputs[j] * this.inputs[k]);
+                        }
                     }
                 }
             }
