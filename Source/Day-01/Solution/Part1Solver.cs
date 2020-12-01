@@ -2,7 +2,6 @@
 {
     using Common;
     using Serilog;
-    using System.Threading.Tasks;
 
     public class Part1Solver : ISolver
     {
@@ -19,9 +18,10 @@
 
         public void Solve()
         {
-            for (int i = 0; i < this.inputs.Length; i++)
+            var length = this.inputs.Length;
+            for (int i = 0; i < length; i++)
             {
-                for (int j = i + 1; j < this.inputs.Length; j++)
+                for (int j = i + 1; j < length; j++)
                 {
                     if (this.inputs[i] + this.inputs[j] == this.target)
                     {

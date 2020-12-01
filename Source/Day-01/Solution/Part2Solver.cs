@@ -19,11 +19,12 @@
 
         public void Solve()
         {
-            for (int i = 0; i < this.inputs.Length; i++)
+            var length = this.inputs.Length;
+            for (int i = 0; i < length; i++)
             {
-                for (int j = i + 1; j < this.inputs.Length; j++)
+                for (int j = i + 1; j < length; j++)
                 {
-                    for (int k = j + 1; k < this.inputs.Length; k++)
+                    for (int k = j + 1; k < length; k++)
                     {
                         if (this.inputs[i] + this.inputs[j] + this.inputs[k] == this.target)
                         {
