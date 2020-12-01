@@ -13,6 +13,7 @@
         {
             ProgramShell.RunSilent(new Part1Solver(2020, FileUtil.GetIntArray("Inputs/part1.txt")));
         }
+
         [Benchmark]
         public void Part2()
         {
