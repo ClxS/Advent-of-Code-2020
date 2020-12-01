@@ -39,5 +39,11 @@
         {
             ProgramShell.RunSilent(new Part2SolverIntBuckets(2020, this.data));
         }
+
+        [Benchmark]
+        public void Part2IntBucketsStackalloc()
+        {
+            ProgramShell.RunSilent(new Part2SolverIntBucketsStackalloc(2020, this.data));
+        }
     }
 }
