@@ -21,6 +21,10 @@ local function configureProject(path)
 	filter {"files:**/Inputs/**"}
 		buildaction "Copy"
 	filter {}
+
+	filter {"configurations:Release"}
+		optimize "On"
+	filter{}
 end
 
 function common(name, isWpf)
