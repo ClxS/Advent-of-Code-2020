@@ -14,7 +14,7 @@
             this.inputs = inputs;
         }
 
-        public string Name => "Day1 Part2 HashTable";
+        public string Name => "Day1 Part2 Int Buckets";
 
         public void Solve()
         {
