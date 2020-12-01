@@ -24,5 +24,6 @@ For an additional challenege, I added "Part 3", which looks for a combination of
 |              [Part2HashSet](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-01/Solution/Part2SolverHashTable.cs) | 103.591 us | 0.5929 us | 0.5546 us |  3.0518 |      - |     - |   13176 B |
 |           [Part2IntBuckets](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-01/Solution/Part2SolverIntBuckets.cs) |  12.347 us | 0.1006 us | 0.0941 us |  0.5341 |      - |     - |    2272 B |
 | [Part2IntBucketsStackalloc](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-01/Solution/Part2SolverIntBucketsStackalloc.cs)  |  14.915 us | 0.2608 us | 0.2439 us |  0.5341 |      - |     - |    2272 B |
+| [Part2Linq](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-01/Solution/Part2SolverLinq.cs) | 721.3 us | 9.24 us | 7.71 us | 115.2344 |     - |     - | 471.02 KB |
 |                     [Part3](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-01/Solution/Part3Solver.cs) | 280.107 us | 3.1263 us | 2.6106 us | 19.5313 | 4.3945 |     - |   84568 B |
 
