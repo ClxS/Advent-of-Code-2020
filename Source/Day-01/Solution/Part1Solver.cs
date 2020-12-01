@@ -4,7 +4,7 @@
     using Serilog;
     using System.Threading.Tasks;
 
-    internal class Part1Solver : ISolver
+    public class Part1Solver : ISolver
     {
         private readonly int target;
         private readonly int[] inputs;
