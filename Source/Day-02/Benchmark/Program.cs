@@ -1,7 +1,6 @@
-namespace Day2
+namespace Day2_Benchmark
 {
     using BenchmarkDotNet.Running;
-    using Day1_Benchmark;
 
     public static class Program
     {
