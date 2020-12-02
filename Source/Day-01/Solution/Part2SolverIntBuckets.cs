@@ -2,6 +2,7 @@
 {
     using Common;
     using Serilog;
+    using System;
 
     public class Part2SolverIntBuckets : ISolver
     {
@@ -18,13 +19,15 @@
 
         public void Solve()
         {
+            Array.Sort(this.inputs);
+
             var length = this.inputs.Length;
             var store = new IntBucketSet(this.inputs);
 
-            for (int i = 0; i < length; i++)
+            for (int i = length - 1; i >= 0; i--)
             {
                 var iValue = this.inputs[i];
-                for (int j = i + 1; j < length; j++)
+                for (int j = length - 1; j >= i + 1; j--)
                 {
                     var jValue = this.inputs[j];
                     var requiredValue = this.target - (iValue + jValue);
