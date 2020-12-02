@@ -16,9 +16,9 @@ AMD Ryzen 5 2600, 1 CPU, 12 logical and 6 physical cores
 ## Day 2
 |           Method |     Mean |    Error |   StdDev |   Gen 0 |  Gen 1 | Gen 2 | Allocated |
 |----------------- |---------:|---------:|---------:|--------:|-------:|------:|----------:|
-| ComposePasswords | 43.17 us | 0.850 us | 1.219 us | 25.0244 | 2.9907 |     - |  98.95 KB |
-|            Part1 | 78.90 us | 1.465 us | 1.223 us | 25.7568 | 0.6104 |     - |  102.8 KB |
-|            Part2 | 77.70 us | 1.409 us | 1.832 us | 25.7568 | 0.2441 |     - | 102.98 KB |
+| [ComposePasswords](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-02/Solution/Password.cs) | 43.17 us | 0.850 us | 1.219 us | 25.0244 | 2.9907 |     - |  98.95 KB |
+|            [Part1](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-02/Solution/Part1Solver.cs) | 78.90 us | 1.465 us | 1.223 us | 25.7568 | 0.6104 |     - |  102.8 KB |
+|            [Part2](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-02/Solution/Part2Solver.cs) | 77.70 us | 1.409 us | 1.832 us | 25.7568 | 0.2441 |     - | 102.98 KB |
 
 ## Day 1
 
