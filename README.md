@@ -13,6 +13,12 @@ AMD Ryzen 5 2600, 1 CPU, 12 logical and 6 physical cores
   [Host]     : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
   DefaultJob : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
 ````
+## Day 3
+| Method |     Mean |     Error |    StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|------- |---------:|----------:|----------:|-------:|------:|------:|----------:|
+|  [Part1](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-03/Solution/Part1Solver.cs) | 1.381 us | 0.0192 us | 0.0179 us | 0.0134 |     - |     - |      64 B |
+|  [Part2](https://github.com/ClxS/Advent-of-Code-2020/blob/master/Source/Day-03/Solution/Part2Solver.cs) | 7.926 us | 0.0892 us | 0.0835 us | 0.0305 |     - |     - |     128 B |
+
 ## Day 2
 |           Method |     Mean |    Error |   StdDev |   Gen 0 |  Gen 1 | Gen 2 | Allocated |
 |----------------- |---------:|---------:|---------:|--------:|-------:|------:|----------:|
