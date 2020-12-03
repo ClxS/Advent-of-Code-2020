@@ -27,7 +27,8 @@
                 var count = 0;
                 var xVelocity = X;
                 var YVelocity = Y;
-                Parallel.For(0, map.Length / YVelocity, i =>
+                var cellsToMoveDown = map.Length / YVelocity;
+                for (int i = 0; i < cellsToMoveDown; i++)
                 {
                     var line = map[i * YVelocity];
                     var x = (xVelocity * i) % line.Length;
@@ -35,7 +36,7 @@
                     {
                         Interlocked.Increment(ref count);
                     }
-                });
+                };
 
                 totalMultiplier *= count;
             }

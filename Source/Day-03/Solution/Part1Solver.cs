@@ -23,15 +23,15 @@
         {
             var count = 0;
             var xVelocity = this.movement.X;
-            Parallel.For(0, map.Length, i =>
+            for (int i = 0; i < map.Length; i++)
             {
                 var line = map[i];
                 var x = (xVelocity * i) % line.Length;
                 if (line[x] == '#')
                 {
-                    Interlocked.Increment(ref count);
+                    count++;
                 }
-            });
+            }
 
             Log.Information("You hit {Count} trees.", count);
         }
