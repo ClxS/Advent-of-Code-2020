@@ -128,7 +128,7 @@
                 }
             }
 
-            Log.Information("{Number} bags can contain shiny gold bags", bags["shiny gold"].GetAllStorableIn().Distinct().Count());
+            Log.Information("{Number} bags can contain shiny gold bags", bags["shiny gold"].GetAllStorableIn());
             Log.Information("Shiny gold bags contain {Number} bags", bags["shiny gold"].GetContainable());
         }
 

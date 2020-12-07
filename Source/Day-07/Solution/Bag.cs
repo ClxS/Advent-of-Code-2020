@@ -10,26 +10,41 @@
 
         public Dictionary<string, (Bag Bag, int Count)> ContainableBags { get; } = new Dictionary<string, (Bag Bag, int Count)>();
 
-        public Dictionary<string, (Bag Bag, int Count)> StorableInBags { get; } = new Dictionary<string, (Bag Bag, int Count)>();
+        public Dictionary<string, Bag> StorableInBags { get; } = new Dictionary<string, Bag>();
 
         public void AddContainableBag(int count, Bag other)
         {
             this.ContainableBags[other.Name] = (other, count);
-            other.StorableInBags[this.Name] = (this, count);
+            other.StorableInBags[this.Name] = this;
         }
 
-        public IEnumerable<Bag> GetAllStorableIn()
+        public int GetAllStorableIn()
         {
-            foreach(var bag in this.StorableInBags.Values)
+            var count = 0;
+            HashSet<Bag> encounteredBags = new HashSet<Bag>();
+            Stack<Bag> bagsToProcess = new Stack<Bag>();
+            foreach(var value in this.StorableInBags.Values)
             {
-                yield return bag.Bag;
-                foreach(var child in bag.Bag.GetAllStorableIn())
+                if (encounteredBags.Add(value))
                 {
-                    yield return child;
+                    bagsToProcess.Push(value);
                 }
             }
 
-            //return this.StorableInBags.Values.SelectMany(c => c.Bag.GetAllStorableIn()).Concat(StorableInBags.Values.Select(v => v.Bag)).Distinct();
+            while(bagsToProcess.Count > 0)
+            {
+                var bag = bagsToProcess.Pop();
+                count++;
+                foreach (var child in bag.StorableInBags.Values)
+                {
+                    if (encounteredBags.Add(child))
+                    {
+                        bagsToProcess.Push(child);
+                    }
+                }
+            }
+
+            return count;
         }
 
         public int GetContainable()
