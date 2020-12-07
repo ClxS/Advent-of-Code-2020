@@ -17,9 +17,9 @@
         }
 
         [Benchmark]
-        public void Part1()
+        public void Part1And2()
         {
-            ProgramShell.RunSilent(new Part1Solver(this.text));
+            ProgramShell.RunSilent(new Day7Solver(this.text));
         }
 
         //[Benchmark]

@@ -6,24 +6,41 @@
 
     public class Bag
     {
-        private Dictionary<string, (Bag Bag, int Count)> storableIn = new Dictionary<string, (Bag Bag, int Count)>();
-        private Dictionary<string, (Bag Bag, int Count)> containableBags = new Dictionary<string, (Bag Bag, int Count)>();
-
         public string Name { get; init; }
 
-        public ReadOnlyDictionary<string, (Bag Bag, int Count)> ContainableBags => new ReadOnlyDictionary<string, (Bag Bag, int Count)>(containableBags);
+        public Dictionary<string, (Bag Bag, int Count)> ContainableBags { get; } = new Dictionary<string, (Bag Bag, int Count)>();
 
-        public ReadOnlyDictionary<string, (Bag Bag, int Count)> StorableInBags => new ReadOnlyDictionary<string, (Bag Bag, int Count)>(containableBags);
+        public Dictionary<string, (Bag Bag, int Count)> StorableInBags { get; } = new Dictionary<string, (Bag Bag, int Count)>();
 
         public void AddContainableBag(int count, Bag other)
         {
-            this.containableBags[other.Name] = (other, count);
-            other.storableIn[this.Name] = (this, count);
+            this.ContainableBags[other.Name] = (other, count);
+            other.StorableInBags[this.Name] = (this, count);
         }
 
         public IEnumerable<Bag> GetAllStorableIn()
         {
-            return this.storableIn.Values.SelectMany(c => c.Bag.GetAllStorableIn()).Concat(storableIn.Values.Select(v => v.Bag)).Distinct();
+            foreach(var bag in this.StorableInBags.Values)
+            {
+                yield return bag.Bag;
+                foreach(var child in bag.Bag.GetAllStorableIn())
+                {
+                    yield return child;
+                }
+            }
+
+            //return this.StorableInBags.Values.SelectMany(c => c.Bag.GetAllStorableIn()).Concat(StorableInBags.Values.Select(v => v.Bag)).Distinct();
+        }
+
+        public int GetContainable()
+        {
+            var sum = 0;
+            foreach(var bag in this.ContainableBags.Values)
+            {
+                sum += bag.Bag.GetContainable() * bag.Count + bag.Count;
+            }
+
+            return sum;
         }
     }
 }

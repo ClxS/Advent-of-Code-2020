@@ -8,17 +8,17 @@
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    public class Part1Solver : ISolver
+    public class Day7Solver : ISolver
     {
         private static char[] workSplitters = new[] { ' ', ',' }; 
         private readonly string text;
 
-        public Part1Solver(string text)
+        public Day7Solver(string text)
         {
             this.text = text;
         }
 
-        public string Name => "Day7 Part1";
+        public string Name => "Day7";
 
         private enum State
         {
@@ -29,7 +29,7 @@
 
         public void Solve()
         {
-            var bags = new Dictionary<string, Bag>();
+            var bags = new Dictionary<string, Bag>(2048);
             Bag GetOrAddBag(string name)
             {
                 if (!bags.TryGetValue(name, out var bag))
@@ -56,7 +56,7 @@
                 Bag lineBag = default;
                 foreach (var word in line.SplitAsSpans(workSplitters.AsSpan()))
                 {
-                    bool repeat = false;
+                    bool repeat;
                     do
                     {
                         repeat = false;
@@ -128,7 +128,8 @@
                 }
             }
 
-            Log.Information("{Number} bags can contain shiny gold bags", bags["shiny gold"].GetAllStorableIn().Count());
+            Log.Information("{Number} bags can contain shiny gold bags", bags["shiny gold"].GetAllStorableIn().Distinct().Count());
+            Log.Information("Shiny gold bags contain {Number} bags", bags["shiny gold"].GetContainable());
         }
 
         private string ComposeFullName(ReadOnlySpan<char> bagStart, ReadOnlySpan<char> bagEnd, ReadOnlySpan<char> line)

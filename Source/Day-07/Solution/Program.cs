@@ -10,8 +10,7 @@ namespace Day7
             var data = File.ReadAllText("Inputs/part1.txt");
             ProgramShell
                 .Run(
-                    new Part1Solver(data),
-                    new Part2Solver(data));
+                    new Day7Solver(data));
         }
     }
 }
