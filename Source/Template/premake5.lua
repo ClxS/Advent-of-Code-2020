@@ -1,0 +1,2 @@
+solution('Template')
+benchmark('Template')
