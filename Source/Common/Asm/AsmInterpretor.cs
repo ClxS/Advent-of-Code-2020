@@ -1,11 +1,17 @@
 ﻿namespace Common.Asm
 {
     using System;
+    using System.IO;
     using System.Threading;
 
     public class AsmInterpretor
     {
-        public delegate void InstructionMovedEventHandler(int instruction);
+        private bool stop = false;
+        private int instructionCount;
+        private int accumulatorValue;
+        private AsmInstruction[] instructions;
+
+        public delegate void InstructionMovedEventHandler(AsmInterpretor interpretor, int instruction);
 
         private readonly int stackSize;
 
@@ -17,36 +23,30 @@
             this.Instructions = new AsmInstruction[this.stackSize];
         }
 
-        public AsmInstruction[] Instructions { get; private set; }
+        public AsmInstruction[] Instructions { get => instructions; private set => instructions = value; }
 
-        public int InstructionCount { get; private set; }
+        public int InstructionCount { get => instructionCount; private set => instructionCount = value; }
 
-        public int AccumulatorValue { get; private set; }
+        public int AccumulatorValue { get => accumulatorValue; private set => accumulatorValue = value; }
 
         public void Load(string instructionData)
         {
             int opIdx = 0;
-            foreach (var line in instructionData.SplitLines())
+
+            var reader = new SpanStringReader(instructionData);
+            ReadOnlySpan<char> value;
+            while ((value = reader.ReadWord()) != default)
             {
-                ReadOnlySpan<char> op = default;
-                int accumulator = default;
-                foreach (var word in line.SplitAsSpans(" "))
+                var factor = reader.ReadChar();
+                var operand = reader.ReadWord();
+
+                var operandValue = int.Parse(operand);
+                if (factor == '-')
                 {
-                    if (op == default)
-                    {
-                        op = word;
-                    }
-                    else
-                    {
-                        accumulator = int.Parse(word[1..]);
-                        if (word[0] == '-')
-                        {
-                            accumulator = -accumulator;
-                        }
-                    }
+                    operandValue = -operandValue;
                 }
 
-                this.Instructions[opIdx++] = new AsmInstruction(GetOpCode(op), accumulator);
+                this.Instructions[opIdx++] = new AsmInstruction(GetOpCode(value), operandValue);
             }
 
             this.InstructionCount = opIdx;
@@ -54,16 +54,23 @@
 
         public void Load(AsmInstruction[] instructions, int instructionCount)
         {
-            this.Instructions = instructions;
             this.InstructionCount = instructionCount;
+            this.instructions = new AsmInstruction[instructionCount];
+            Array.Copy(instructions, this.instructions, instructionCount);
         }
 
-        public void Execute(int instructionPointer = 0, CancellationToken cancellationToken = default)
+        public void Stop()
         {
-            this.AccumulatorValue = 0;
-            while (instructionPointer < InstructionCount && !cancellationToken.IsCancellationRequested)
+            this.stop = true;
+        }
+
+        public bool Execute(int instructionPointer = 0)
+        {
+            this.accumulatorValue = 0;
+            this.stop = false;
+            while (instructionPointer < instructionCount && !this.stop)
             {
-                AsmInstruction instruction = Instructions[instructionPointer];
+                AsmInstruction instruction = instructions[instructionPointer];
                 switch (instruction.OpCode)
                 {
                     case Opcode.Nop:
@@ -81,26 +88,28 @@
                         break;
                 }
             }
+
+            return !this.stop;
         }
 
         protected void OnInstructionMoved(int pointer)
         {
-            InstructionMoved?.Invoke(pointer);
+            InstructionMoved?.Invoke(this, pointer);
         }
 
         private Opcode GetOpCode(ReadOnlySpan<char> op)
         {
-            if (op.Equals("nop", StringComparison.Ordinal))
+            if (op.SequenceEqual("nop"))
             {
                 return Opcode.Nop;
             }
 
-            if (op.Equals("acc", StringComparison.Ordinal))
+            if (op.SequenceEqual("acc"))
             {
                 return Opcode.Acc;
             }
 
-            if (op.Equals("jmp", StringComparison.Ordinal))
+            if (op.SequenceEqual("jmp"))
             {
                 return Opcode.Jmp;
             }

@@ -3,14 +3,12 @@
     using Common;
     using Common.Asm;
     using Serilog;
-    using System;
     using System.Collections;
-    using System.Linq;
-    using System.Threading;
 
     public class Part1Solver : ISolver
     {
         private readonly string instructions;
+        private readonly BitArray visitedInstructions = new BitArray(2048);
 
         public Part1Solver(string instructions)
         {
@@ -21,23 +19,21 @@
 
         public void Solve()
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            BitArray visitedInstructions = new BitArray(2048);
-
             AsmInterpretor interpretor = new AsmInterpretor();
             interpretor.Load(this.instructions);
-            interpretor.InstructionMoved += (int instruction) =>
+            interpretor.InstructionMoved += Interpretor_InstructionMoved;
+            interpretor.Execute(0);
+        }
+
+        private void Interpretor_InstructionMoved(AsmInterpretor interpretor, int instruction)
+        {
+            if (visitedInstructions.Get(instruction))
             {
-                if (visitedInstructions.Get(instruction))
-                {
-                    Log.Information("Loop detected. Accumulator is {Accumulator}", interpretor.AccumulatorValue);
-                    cts.Cancel();
-                }
+                Log.Information("Loop detected. Accumulator is {Accumulator}", interpretor.AccumulatorValue);
+                interpretor.Stop();
+            }
 
-                visitedInstructions.Set(instruction, true);
-            };
-
-            interpretor.Execute(0, cts.Token);
+            visitedInstructions.Set(instruction, true);
         }
     }
 }

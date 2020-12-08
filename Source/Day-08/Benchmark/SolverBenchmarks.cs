@@ -27,5 +27,11 @@
         {
             ProgramShell.RunSilent(new Part2Solver(this.instructions));
         }
+
+        [Benchmark]
+        public void Part2Parallel()
+        {
+            ProgramShell.RunSilent(new Part2ParallelSolver(this.instructions));
+        }
     }
 }

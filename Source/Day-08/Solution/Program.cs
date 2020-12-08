@@ -10,8 +10,9 @@ namespace Day8
             var data = File.ReadAllText("Inputs/part1.txt");
             ProgramShell
                 .Run(
-                    new Part1Solver(data),
-                    new Part2Solver(data));
+                    //new Part1Solver(data),
+                    //new Part2Solver(data),
+                    new Part2ParallelSolver(data));
         }
     }
 }

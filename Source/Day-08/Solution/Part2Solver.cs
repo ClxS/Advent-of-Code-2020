@@ -11,6 +11,7 @@
     public class Part2Solver : ISolver
     {
         private readonly string instructions;
+        private BitArray visitedInstructions = new BitArray(2048);
 
         public Part2Solver(string instructions)
         {
@@ -20,24 +21,14 @@
         public string Name => "Day8 Part2";
 
         public void Solve()
-        {            
+        {
             AsmInterpretor interpretor = new AsmInterpretor();
 
             interpretor.Load(this.instructions);
+            interpretor.InstructionMoved += Interpretor_InstructionMoved;
+
             var instructions = interpretor.Instructions;
             var instructionCount = interpretor.InstructionCount;
-
-            CancellationTokenSource cts = default;
-            BitArray visitedInstructions = default;
-            interpretor.InstructionMoved += (int instruction) =>
-            {
-                if (visitedInstructions.Get(instruction))
-                {
-                    cts.Cancel();
-                }
-
-                visitedInstructions.Set(instruction, true);
-            };
 
             for (int i = 0; i < instructionCount; i++)
             {
@@ -49,11 +40,8 @@
                 var originalInstruction = instructions[i];
                 instructions[i] = originalInstruction with { OpCode = instructions[i].OpCode == Opcode.Jmp ? Opcode.Nop : Opcode.Jmp };
 
-                cts = new CancellationTokenSource();
                 visitedInstructions = new BitArray(2048);
-
-                interpretor.Execute(0, cts.Token);
-                if (!cts.IsCancellationRequested)
+                if (interpretor.Execute())
                 {
                     Log.Information("Loop fix detected. Accumulator is {Accumulator}", interpretor.AccumulatorValue);
                     break;
@@ -61,6 +49,16 @@
 
                 instructions[i] = originalInstruction;
             }
+        }
+
+        private void Interpretor_InstructionMoved(AsmInterpretor interpretor, int instruction)
+        {
+            if (visitedInstructions.Get(instruction))
+            {
+                interpretor.Stop();
+            }
+
+            visitedInstructions.Set(instruction, true);
         }
     }
 }
