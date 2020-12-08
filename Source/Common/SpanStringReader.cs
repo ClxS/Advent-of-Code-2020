@@ -48,9 +48,10 @@
             }
 
             var idx = 0;
-            while (idx < data.Length)
+            while (idx < data.Length && idx + 1 < dataLength)
             {
-                if (idx + 1 >= dataLength || !char.IsLetterOrDigit(data[idx + 1]))
+                var @char = data[idx + 1];
+                if (!((@char >= 'a' && @char <= 'z') || (@char >= '0' && @char <= '9')))
                 {
                     break;
                 }
@@ -62,9 +63,10 @@
 
             if (skipToNextChar)
             {
-                while (idx < data.Length)
+                while (idx < data.Length && idx + 1 < dataLength)
                 {
-                    if (idx + 1 >= dataLength || !char.IsWhiteSpace(data[idx + 1]))
+                    var @char = data[idx + 1];
+                    if (!(@char == '\r' || @char == '\n' || @char == ' '))
                     {
                         break;
                     }

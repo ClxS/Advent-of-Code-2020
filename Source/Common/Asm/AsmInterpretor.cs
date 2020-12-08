@@ -68,6 +68,7 @@
         {
             this.accumulatorValue = 0;
             this.stop = false;
+
             while (instructionPointer < instructionCount && !this.stop)
             {
                 AsmInstruction instruction = instructions[instructionPointer];
@@ -78,7 +79,7 @@
                         OnInstructionMoved(instructionPointer);
                         break;
                     case Opcode.Acc:
-                        AccumulatorValue += instruction.Operand;
+                        accumulatorValue += instruction.Operand;
                         instructionPointer++;
                         OnInstructionMoved(instructionPointer);
                         break;
@@ -97,7 +98,7 @@
             InstructionMoved?.Invoke(this, pointer);
         }
 
-        private Opcode GetOpCode(ReadOnlySpan<char> op)
+        private static Opcode GetOpCode(ReadOnlySpan<char> op)
         {
             if (op.SequenceEqual("nop"))
             {
