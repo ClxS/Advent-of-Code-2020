@@ -38,7 +38,7 @@
                 {
                     for (int j = 0; j < preambleSize; j++)
                     {
-                        if (i != j && backlog.GetValue(i) + backlog.GetValue(j) == num)
+                        if (i != j && backlog[i] + backlog[j] == num)
                         {
                             found = true;
                             break;

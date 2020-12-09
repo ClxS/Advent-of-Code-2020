@@ -132,10 +132,13 @@ namespace Common
 
         public T this[int index]
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return _buffer[_start + (index < capacity - _start ? index : index - capacity)];
             }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 _buffer[_start + (index < capacity - _start ? index : index - capacity)] = value;
