@@ -1,6 +1,7 @@
 ﻿namespace Common
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     public ref struct SpanStringReader
     {
@@ -11,6 +12,7 @@
             this.data = sourceString;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlySpan<char> ReadLine()
         {
             if (data.Length == 0)
@@ -39,6 +41,13 @@
             return retValue;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsEndOfFile()
+        {
+            return this.data.Length == 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlySpan<char> ReadWord(bool skipToNextChar = true)
         {
             var dataLength = data.Length;
@@ -79,6 +88,7 @@
             return retValue;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public char ReadChar()
         {
             if (data.Length == 0)

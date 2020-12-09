@@ -7,7 +7,7 @@ namespace Template
     {
         public static void Main()
         {
-            var data = File.ReadAllLines("Inputs/part1.txt");
+            var data = File.ReadAllText("Inputs/part1.txt");
             ProgramShell
                 .Run(
                     new Part1Solver(data),

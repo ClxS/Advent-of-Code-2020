@@ -1,23 +1,73 @@
-﻿namespace Template
+﻿namespace Day9
 {
     using Common;
     using Serilog;
     using System;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     public class Part1Solver : ISolver
     {
-        private readonly string[] lines;
+        const int preambleSize = 25;
 
-        public Part1Solver(string[] lines)
+        private readonly string text;
+
+        public Part1Solver(string text)
         {
-            this.lines = lines;
+            this.text = text;
         }
 
-        public string Name => "Template Part1";
+        public string Name => "Day9 Part1";
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public long GetValue()
+        {
+            var backlog = new CircularBuffer<long>(preambleSize);
+
+            var reader = new SpanStringReader(this.text);
+            for (int i = 0; i < preambleSize; i++)
+            {
+                backlog.PushBack(long.Parse(reader.ReadWord(true)));
+            }
+
+            while (!reader.IsEndOfFile())
+            {
+                var num = long.Parse(reader.ReadWord(true));
+                bool found = false;
+                for (int i = 0; i < preambleSize; i++)
+                {
+                    for (int j = 0; j < preambleSize; j++)
+                    {
+                        if (i != j && backlog.GetValue(i) + backlog.GetValue(j) == num)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found)
+                    {
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    backlog.PushBack(num);
+                }
+                else
+                {
+                    return num;
+                }
+            }
+
+            return -1;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Solve()
         {
+            Log.Information("Incorrect element value: {Value}", GetValue());
         }
     }
 }
