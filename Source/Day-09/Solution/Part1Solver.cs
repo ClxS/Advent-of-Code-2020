@@ -25,6 +25,7 @@
             Log.Information("Incorrect element value: {Value}", Solve(this.text));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Solve(string text)
         {
             var backlog = new StackCircularBuffer<long>(stackalloc long[preambleSize]);
