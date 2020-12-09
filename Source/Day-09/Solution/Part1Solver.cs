@@ -22,7 +22,7 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public long GetValue()
         {
-            var backlog = new StackCircularBuffer<long>(preambleSize, stackalloc long[preambleSize]);
+            var backlog = new StackCircularBuffer<long>(stackalloc long[preambleSize]);
 
             var reader = new SpanStringReader(this.text);
             for (int i = 0; i < preambleSize; i++)
