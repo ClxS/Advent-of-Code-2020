@@ -20,11 +20,16 @@
         public string Name => "Day9 Part1";
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public long GetValue()
+        public void Solve()
+        {
+            Log.Information("Incorrect element value: {Value}", Solve(this.text));
+        }
+
+        public static long Solve(string text)
         {
             var backlog = new StackCircularBuffer<long>(stackalloc long[preambleSize]);
 
-            var reader = new SpanStringReader(this.text);
+            var reader = new SpanStringReader(text);
             for (int i = 0; i < preambleSize; i++)
             {
                 backlog.PushBack(long.Parse(reader.ReadWord(true)));
@@ -62,12 +67,6 @@
             }
 
             return -1;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Solve()
-        {
-            Log.Information("Incorrect element value: {Value}", GetValue());
         }
     }
 }

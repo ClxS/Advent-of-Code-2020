@@ -8,7 +8,7 @@ namespace Day9
         public static void Main()
         {
             var data = File.ReadAllText("Inputs/part1.txt");
-            var value = new Part1Solver(data).GetValue();
+            var value = Part1Solver.Solve(data);
             ProgramShell
                 .Run(
                     new Part1Solver(data),

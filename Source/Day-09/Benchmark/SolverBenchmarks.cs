@@ -15,19 +15,19 @@
         public void GlobalSetup()
         {
             this.text = File.ReadAllText("Inputs/part1.txt");
-            part1Value = new Part1Solver(this.text).GetValue();
+            part1Value = Part1Solver.Solve(this.text);
         }
 
         [Benchmark]
         public void Part1()
         {
-            ProgramShell.RunSilent(new Part1Solver(this.text));
+            Part1Solver.Solve(this.text);
         }
 
         [Benchmark]
         public void Part2()
         {
-            ProgramShell.RunSilent(new Part2Solver(this.text, this.part1Value));
+            Part2Solver.Solve(this.text, this.part1Value);
         }
     }
 }

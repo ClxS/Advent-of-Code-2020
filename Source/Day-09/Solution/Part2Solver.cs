@@ -26,9 +26,15 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Solve()
         {
+            Solve(this.text, this.searchValue);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Solve(string text, long searchValue)
+        {
             var backlog = new List<long>();
 
-            var reader = new SpanStringReader(this.text);
+            var reader = new SpanStringReader(text);
             while (!reader.IsEndOfFile())
             {
                 var num = long.Parse(reader.ReadWord(true));
@@ -38,7 +44,7 @@
             var backlogCount = backlog.Count;
             for(var i = 0; i < backlogCount; i++)
             {
-                if (backlog[i] > this.searchValue)
+                if (backlog[i] > searchValue)
                 {
                     continue;
                 }
@@ -51,12 +57,12 @@
                     sum += backlog[j];
                     min = Math.Min(backlog[j], min);
                     max = Math.Max(backlog[j], max);
-                    if (sum > this.searchValue)
+                    if (sum > searchValue)
                     {
                         break;
                     }
 
-                    if (sum == this.searchValue)
+                    if (sum == searchValue)
                     {
                         Log.Information("Encryption weakness: {Value}", min + max);
                         return;
