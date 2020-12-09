@@ -7,11 +7,11 @@
 
     public class Part1Solver : ISolver
     {
-        private readonly string[] lines;
+        private readonly string text;
 
-        public Part1Solver(string[] lines)
+        public Part1Solver(string text)
         {
-            this.lines = lines;
+            this.text = text;
         }
 
         public string Name => "Template Part1";

@@ -8,24 +8,24 @@
     [MemoryDiagnoser]
     public class SolverBenchmarks
     {
-        private string[] lines;
+        private string text;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
-            this.lines = File.ReadAllLines("Inputs/part1.txt");
+            this.text = File.ReadAllText("Inputs/part1.txt");
         }
 
         [Benchmark]
         public void Part1()
         {
-            ProgramShell.RunSilent(new Part1Solver(this.lines));
+            ProgramShell.RunSilent(new Part1Solver(this.text));
         }
 
         [Benchmark]
         public void Part2()
         {
-            ProgramShell.RunSilent(new Part2Solver(this.lines));
+            ProgramShell.RunSilent(new Part2Solver(this.text));
         }
     }
 }
