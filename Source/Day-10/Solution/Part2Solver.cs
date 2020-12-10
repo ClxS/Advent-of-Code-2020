@@ -35,7 +35,7 @@
             var routesAtNode = new StackLongBucketSet(stackalloc long[target + 5]);
             routesAtNode.Add(0);
 
-            var combinations = 1l;
+            var combinations = 1L;
             for (var i = 0; i <= target; i++)
             {
                 if (!buckets.Contains(i))
