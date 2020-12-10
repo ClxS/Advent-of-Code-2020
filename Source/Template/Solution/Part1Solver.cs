@@ -18,6 +18,12 @@
 
         public void Solve()
         {
+            Log.Information("Value: {Value}", Solve(this.text));
+        }
+
+        public static int Solve(string text)
+        {
+            return 0;
         }
     }
 }

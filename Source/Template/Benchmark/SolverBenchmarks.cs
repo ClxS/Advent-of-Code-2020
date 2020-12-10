@@ -19,13 +19,13 @@
         [Benchmark]
         public void Part1()
         {
-            ProgramShell.RunSilent(new Part1Solver(this.text));
+            Part1Solver.Solve(this.text);
         }
 
         [Benchmark]
         public void Part2()
         {
-            ProgramShell.RunSilent(new Part2Solver(this.text));
+            Part2Solver.Solve(this.text);
         }
     }
 }
