@@ -1,6 +1,7 @@
 ﻿namespace Template
 {
     using Common;
+    using Serilog;
 
     public class Part2Solver : ISolver
     {
