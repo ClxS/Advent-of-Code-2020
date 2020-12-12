@@ -24,8 +24,8 @@
         {
             var reader = new SpanStringReader(text);
 
-            var cos90 = 0;
-            var sin90 = 1;
+            const int cos90 = 0;
+            const int sin90 = 1;
 
             (int X, int Y) pos = (0, 0);
             (int X, int Y) waypoint = (10, 1);
@@ -52,7 +52,7 @@
                             var count = magnitude / 90;
                             for (var i = 0; i < count; ++i)
                             {
-                                waypoint = ((waypoint.X * cos90) - waypoint.Y * sin90, (waypoint.X * sin90) + (waypoint.Y * cos90));
+                                waypoint = ((waypoint.X * cos90) - (waypoint.Y * sin90), (waypoint.X * sin90) + (waypoint.Y * cos90));
                             }
                         }
                         break;
@@ -61,7 +61,7 @@
                             var count = magnitude / 90;
                             for (var i = 0; i < count; ++i)
                             {
-                                waypoint = ((waypoint.X * -cos90) - waypoint.Y * -sin90, (waypoint.X * -sin90) + (waypoint.Y * -cos90));
+                                waypoint = ((waypoint.X * -cos90) - (waypoint.Y * -sin90), (waypoint.X * -sin90) + (waypoint.Y * -cos90));
                             }
                         }
                         break;

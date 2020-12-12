@@ -25,8 +25,8 @@
         {
             var reader = new SpanStringReader(text);
 
-            var cos90 = 0;
-            var sin90 = 1;
+            const int cos90 = 0;
+            const int sin90 = 1;
 
             (int X, int Y) pos = (0, 0);
             (int X, int Y) vector = (1, 0);
@@ -53,7 +53,7 @@
                             var count = magnitude / 90;
                             for (var i = 0; i < count; ++i)
                             {
-                                vector = ((vector.X * cos90) - vector.Y * sin90, (vector.X * sin90) + (vector.Y * cos90));
+                                vector = ((vector.X * cos90) - (vector.Y * sin90), (vector.X * sin90) + (vector.Y * cos90));
                             }
                         }
                         break;
@@ -62,7 +62,7 @@
                             var count = magnitude / 90;
                             for (var i = 0; i < count; ++i)
                             {
-                                vector = ((vector.X * -cos90) - vector.Y * -sin90, (vector.X * -sin90) + (vector.Y * -cos90));
+                                vector = ((vector.X * -cos90) - (vector.Y * -sin90), (vector.X * -sin90) + (vector.Y * -cos90));
                             }
                         }
                         break;
