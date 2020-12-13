@@ -42,6 +42,36 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ReadOnlySpan<char> ReadUntil(char v, bool skipFound)
+        {
+            if (data.Length == 0)
+            {
+                return default;
+            }
+
+            var idx = 0;
+            while (idx < data.Length)
+            {
+                if (data[idx] == v)
+                {
+                    break;
+                }
+
+                idx++;
+            }
+
+            var retValue = this.data.Slice(0, idx);
+
+            if (skipFound && idx < data.Length - 1)
+            {
+                idx++;
+            }
+
+            data = data[idx..];
+            return retValue;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsEndOfFile()
         {
             return this.data.Length == 0;
@@ -132,7 +162,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int ParseInt(ReadOnlySpan<char> input)
+        public int ParseInt(ReadOnlySpan<char> input)
         {
             int val = 0;
             for (var i = 0; i < input.Length; ++i)
