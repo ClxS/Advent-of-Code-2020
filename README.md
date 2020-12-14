@@ -13,6 +13,12 @@ AMD Ryzen 5 2600, 1 CPU, 12 logical and 6 physical cores
   [Host]     : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
   DefaultJob : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
 ````
+## [Day 14](https://adventofcode.com/2020/day/14)
+| Method |        Mean |     Error |    StdDev |     Gen 0 |     Gen 1 |    Gen 2 |   Allocated |
+|------- |------------:|----------:|----------:|----------:|----------:|---------:|------------:|
+|  Part1 |    351.6 us |   6.94 us |   9.96 us |  166.5039 |  166.5039 | 166.5039 |   512.02 KB |
+|  Part2 | 35,166.9 us | 536.55 us | 475.64 us | 5357.1429 | 1285.7143 | 785.7143 | 27005.59 KB |
+
 ## [Day 13](https://adventofcode.com/2020/day/13)
 | Method |        Mean |     Error |   StdDev | Gen 0 | Gen 1 | Gen 2 | Allocated |
 |------- |------------:|----------:|---------:|------:|------:|------:|----------:|
