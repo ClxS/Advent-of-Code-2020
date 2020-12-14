@@ -1,4 +1,4 @@
-namespace Template_Benchmark
+namespace Day13_Benchmark
 {
     using BenchmarkDotNet.Running;
 

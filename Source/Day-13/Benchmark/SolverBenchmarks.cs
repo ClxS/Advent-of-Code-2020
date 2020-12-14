@@ -1,8 +1,8 @@
-﻿namespace Template_Benchmark
+﻿namespace Day13_Benchmark
 {
     using BenchmarkDotNet.Attributes;
     using Common;
-    using Template;
+    using Day13;
     using System.IO;
 
     [MemoryDiagnoser]

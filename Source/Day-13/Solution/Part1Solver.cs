@@ -1,4 +1,4 @@
-﻿namespace Template
+﻿namespace Day13
 {
     using Common;
     using Serilog;
@@ -14,7 +14,7 @@
             this.text = text;
         }
 
-        public string Name => "Template Part1";
+        public string Name => "Day13 Part1";
 
         public void Solve()
         {
