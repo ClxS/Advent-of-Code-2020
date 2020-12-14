@@ -1,4 +1,4 @@
-namespace Template
+namespace Day14
 {
     using Common;
     using System.IO;

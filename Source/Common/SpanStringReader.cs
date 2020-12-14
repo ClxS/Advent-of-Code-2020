@@ -90,7 +90,7 @@
             while (idx < data.Length && idx + 1 < dataLength)
             {
                 var @char = data[idx + 1];
-                if (!((@char >= 'a' && @char <= 'z') || (@char >= '0' && @char <= '9')))
+                if (!((@char >= 'a' && @char <= 'z') || (@char >= 'A' && @char <= 'Z') || (@char >= '0' && @char <= '9')))
                 {
                     break;
                 }
@@ -107,6 +107,30 @@
 
             data = data[(idx + 1)..];
             return retValue;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ReadOnlySpan<char> PeekWord()
+        {
+            var dataLength = data.Length;
+            if (dataLength == 0)
+            {
+                return default;
+            }
+
+            var idx = 0;
+            while (idx < data.Length && idx + 1 < dataLength)
+            {
+                var @char = data[idx + 1];
+                if (!((@char >= 'a' && @char <= 'z') || (@char >= '0' && @char <= '9')))
+                {
+                    break;
+                }
+
+                idx++;
+            }
+
+            return this.data.Slice(0, idx + 1);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -162,12 +186,58 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ulong ReadUlongBase2(bool skipToNextChar = true)
+        {
+            if (data.Length == 0)
+            {
+                return default;
+            }
+
+            var dataLength = data.Length;
+            var idx = 0;
+            while (idx < data.Length && idx + 1 < dataLength)
+            {
+                var @char = data[idx + 1];
+                if (!(@char >= '0' && @char <= '1'))
+                {
+                    break;
+                }
+
+                idx++;
+            }
+
+            var retValue = this.data.Slice(0, idx + 1);
+
+            if (skipToNextChar)
+            {
+                ProceedToNextChar(ref idx);
+            }
+
+            data = data[(idx + 1)..];
+            return ParseUlongBase2(retValue);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int ParseInt(ReadOnlySpan<char> input)
         {
             int val = 0;
             for (var i = 0; i < input.Length; ++i)
             {
                 val = (val * 10) + (input[i] - '0');
+            }
+
+            return val;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ulong ParseUlongBase2(ReadOnlySpan<char> input)
+        {
+            ulong val = 0ul;
+            for (var i = input.Length - 1; i >= 0; --i)
+            {
+                var offset = (input.Length - 1) - i;
+                var value = (ulong)input[i] - '0';
+                val = value | (1UL << offset);
             }
 
             return val;
