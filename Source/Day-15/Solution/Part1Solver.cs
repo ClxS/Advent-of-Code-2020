@@ -3,7 +3,9 @@
     using Common;
     using Serilog;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     public class Part1Solver : ISolver
     {
@@ -21,9 +23,55 @@
             Log.Information("Value: {Value}", Solve(this.text));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Solve(string text)
         {
-            return 0;
+            var speakTable = new Dictionary<int, (int NextToLast, int Last)>();
+
+            var reader = new SpanStringReader(text);
+
+            var idx = 1;
+            int value = 0;
+            while (!reader.IsEndOfFile())
+            {
+                value = reader.ReadInt();
+                reader.ReadChar();
+
+                value = Step(value, idx, speakTable);
+                idx++;
+            }
+
+            for (; idx <= 2020; ++idx)
+            {
+                value = Step(value, idx, speakTable);
+            }
+
+            return value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int Step(int value, int idx, Dictionary<int, (int NextToLast, int Last)> lastTable)
+        {
+            if (lastTable.TryGetValue(value, out var last))
+            {
+                value = last.Last - last.NextToLast;
+
+                if (lastTable.TryGetValue(value, out last))
+                {
+                    last = (last.Last, idx);
+                    lastTable[value] = last;
+                }
+                else
+                {
+                    lastTable[value] = (idx, idx);
+                }
+            }
+            else
+            {
+                lastTable[value] = (idx, idx);
+            }
+
+            return value;
         }
     }
 }
