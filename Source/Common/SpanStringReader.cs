@@ -31,13 +31,19 @@
                 idx++;
             }
 
-            if (data[idx - 1] == '\r')
+            var skip = 1;
+            if (data[idx] == '\r')
+            {
+                skip++;
+            }
+
+            if (idx > 0 && data[idx - 1] == '\r')
             {
                 idx--;
             }
 
             var retValue = this.data.Slice(0, idx);
-            data = data[idx..];
+            data = data[(idx + skip)..];
             return retValue;
         }
 
@@ -69,6 +75,42 @@
 
             data = data[idx..];
             return retValue;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ReadOnlySpan<char> ReadUntilDigit(bool skipFound)
+        {
+            if (data.Length == 0)
+            {
+                return default;
+            }
+
+            var idx = 0;
+            while (idx < data.Length)
+            {
+                if (data[idx] >= '0' && data[idx] <= '9')
+                {
+                    break;
+                }
+
+                idx++;
+            }
+
+            var retValue = this.data.Slice(0, idx);
+
+            if (skipFound && idx < data.Length - 1)
+            {
+                idx++;
+            }
+
+            data = data[idx..];
+            return retValue;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Skip(int count)
+        {
+            data = data[count..];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
