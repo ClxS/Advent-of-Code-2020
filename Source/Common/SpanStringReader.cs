@@ -23,7 +23,7 @@
             var idx = 0;
             while(idx < data.Length)
             {
-                if (data[idx + 1] == '\n')
+                if (idx + 1 >= data.Length || data[idx + 1] == '\n')
                 {
                     break;
                 }
@@ -40,6 +40,11 @@
             if (idx > 0 && data[idx - 1] == '\r')
             {
                 idx--;
+            }
+
+            if (idx + 1 == data.Length)
+            {
+                idx++;
             }
 
             var retValue = this.data.Slice(0, idx);
