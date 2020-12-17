@@ -111,7 +111,7 @@
 
         public static void DryRunShader()
         {
-            var tmp = Gpu.Default.AllocateReadWriteBuffer<int>(1);
+            using var tmp = Gpu.Default.AllocateReadWriteBuffer<int>(1);
             Gpu.Default.For(0, new CopyData(tmp, tmp));
             Gpu.Default.For(0, new Simulate(tmp, tmp, default, default));
         }
@@ -123,8 +123,8 @@
             var count = 0;
             InitializeDimension(text, data, out var width, out var height, ref count);
 
-            ReadWriteBuffer<int> dimensionA = Gpu.Default.AllocateReadWriteBuffer<int>(size * size * size * size);
-            ReadWriteBuffer<int> dimensionB = Gpu.Default.AllocateReadWriteBuffer<int>(size * size * size * size);
+            using ReadWriteBuffer<int> dimensionA = Gpu.Default.AllocateReadWriteBuffer<int>(size * size * size * size);
+            using ReadWriteBuffer<int> dimensionB = Gpu.Default.AllocateReadWriteBuffer<int>(size * size * size * size);
 
             dimensionA.SetData(data);
 

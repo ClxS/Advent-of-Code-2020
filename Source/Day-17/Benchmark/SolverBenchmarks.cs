@@ -1,6 +1,7 @@
 ﻿namespace Day17_Benchmark
 {
     using BenchmarkDotNet.Attributes;
+    using BenchmarkDotNet.Engines;
     using Day17;
     using System.IO;
 
@@ -16,17 +17,17 @@
             Part2SolverComputeShader.DryRunShader();
         }
 
-        //[Benchmark]
-        //public void Part1()
-        //{
-        //    Part1Solver.Solve(this.text);
-        //}
+        [Benchmark]
+        public void Part1()
+        {
+            Part1Solver.Solve(this.text);
+        }
 
-        //[Benchmark]
-        //public void Part2()
-        //{
-        //    Part2Solver.Solve(this.text);
-        //}
+        [Benchmark]
+        public void Part2()
+        {
+            Part2Solver.Solve(this.text);
+        }
 
         [Benchmark]
         public void Part2ComputeShader()
