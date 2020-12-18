@@ -38,7 +38,7 @@
                     continue;
                 }
 
-                var intValue = reader.ParseInt(value);
+                var intValue = NumberParser.ParseInt(value);
                 schedules[scheduleCount++] = ((ulong)intValue, (ulong)(intValue - cell));
             }
 

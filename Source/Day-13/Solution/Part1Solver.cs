@@ -36,7 +36,7 @@
                     continue;
                 }
 
-                schedules[scheduleCount++] = reader.ParseInt(value);
+                schedules[scheduleCount++] = NumberParser.ParseInt(value);
             }
 
             var closestScheduleValue = double.MaxValue;

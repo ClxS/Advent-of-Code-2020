@@ -37,7 +37,7 @@
                     continue;
                 }
 
-                schedules[scheduleCount++] = (reader.ParseInt(value), cell);
+                schedules[scheduleCount++] = (NumberParser.ParseInt(value), cell);
             }
 
             var sortedSchedules = schedules.Slice(0, scheduleCount);
