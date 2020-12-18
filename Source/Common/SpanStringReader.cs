@@ -48,7 +48,7 @@
             }
 
             var retValue = this.data.Slice(0, idx);
-            data = data[(idx + skip)..];
+            data = data[(Math.Min(idx + skip, data.Length))..];
             return retValue;
         }
 
@@ -229,7 +229,7 @@
             }
 
             data = data[(idx + 1)..];
-            return ParseInt(retValue);
+            return NumberParser.ParseInt(retValue);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -261,34 +261,8 @@
             }
 
             data = data[(idx + 1)..];
-            return ParseUlongBase2(retValue);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int ParseInt(ReadOnlySpan<char> input)
-        {
-            int val = 0;
-            for (var i = 0; i < input.Length; ++i)
-            {
-                val = (val * 10) + (input[i] - '0');
-            }
-
-            return val;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ulong ParseUlongBase2(ReadOnlySpan<char> input)
-        {
-            ulong val = 0ul;
-            for (var i = input.Length - 1; i >= 0; --i)
-            {
-                var offset = (input.Length - 1) - i;
-                var value = (ulong)input[i] - '0';
-                val = value | (1UL << offset);
-            }
-
-            return val;
-        }
+            return NumberParser.ParseUlongBase2(retValue);
+        }        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ProceedToNextChar(ref int idx)
