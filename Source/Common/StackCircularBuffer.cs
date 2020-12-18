@@ -192,24 +192,28 @@ namespace Common
         /// Removes the element at the back of the buffer. Decreasing the 
         /// Buffer size by 1.
         /// </summary>
-        public void PopBack()
+        public T PopBack()
         {
             ThrowIfEmpty("Cannot take elements from an empty buffer.");
+            T value = Back();
             Decrement(ref _end);
             _buffer[_end] = default;
             --_size;
+            return value;
         }
 
         /// <summary>
         /// Removes the element at the front of the buffer. Decreasing the 
         /// Buffer size by 1.
         /// </summary>
-        public void PopFront()
+        public T PopFront()
         {
             ThrowIfEmpty("Cannot take elements from an empty buffer.");
+            T value = Front();
             _buffer[_start] = default;
             Increment(ref _start);
             --_size;
+            return value;
         }
 
         private void ThrowIfEmpty(string message = "Cannot access an empty buffer.")

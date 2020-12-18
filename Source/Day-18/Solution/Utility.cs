@@ -98,7 +98,7 @@
 
         internal static ulong ExecuteExpression(List<char> line)
         {
-            var numbers = new Stack<ulong>();
+            var buffer = new StackCircularBuffer<ulong>(stackalloc ulong[64]);
             var parseIdx = 0;
             var lineSpan = CollectionsMarshal.AsSpan(line);
             while (parseIdx < line.Count)
@@ -118,17 +118,17 @@
                         }
                     }
 
-                    numbers.Push(NumberParser.ParseUlong(lineSpan.Slice(parseIdx, parseEnd - parseIdx)));
+                    buffer.PushBack(NumberParser.ParseUlong(lineSpan.Slice(parseIdx, parseEnd - parseIdx)));
                     parseIdx = parseEnd;
                 }
                 else if (line[parseIdx] == '+')
                 {
-                    numbers.Push(numbers.Pop() + numbers.Pop());
+                    buffer.PushBack(buffer.PopBack() + buffer.PopBack());
                     parseIdx++;
                 }
                 else if (line[parseIdx] == '*')
                 {
-                    numbers.Push(numbers.Pop() * numbers.Pop());
+                    buffer.PushBack(buffer.PopBack() * buffer.PopBack());
                     parseIdx++;
                 }
                 else
@@ -137,7 +137,7 @@
                 }
             }
 
-            return numbers.Pop();
+            return buffer.PopBack();
         }
     }
 }
