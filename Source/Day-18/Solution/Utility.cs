@@ -8,6 +8,29 @@
     {
         private static char[] operatorPresidence = new char[] { '+', '*' };
 
+        internal static void ConvertLineToReversePolish(List<char> line, bool respectOrderOfOperations)
+        {
+            if (respectOrderOfOperations)
+            {
+                InsertOrderOfOperationsBraces(line);
+            }
+
+            var length = line.Count;
+            for (var i = length - 1; i >= 0; i--)
+            {
+                switch (line[i])
+                {
+                    case '+':
+                    case '*':
+                        var @char = line[i];
+                        line.RemoveAt(i);
+
+                        line.Insert(FindOperatorPosition(i, line, true), @char);
+                        break;
+                }
+            }
+        }
+
         private static int FindOperatorPosition(int startIndx, List<char> line, bool forwards)
         {
             var insertIdx = startIndx;
@@ -49,30 +72,6 @@
 
             return insertIdx + (!forwards ? 1 : 0);
         }
-
-        internal static void ConvertLineToReversePolish(List<char> line, bool respectOrderOfOperations)
-        {
-            if (respectOrderOfOperations)
-            {
-                InsertOrderOfOperationsBraces(line);
-            }
-
-            var length = line.Count;
-            for (var i = length - 1; i >= 0; i--)
-            {
-                switch (line[i])
-                {
-                    case '+':
-                    case '*':
-                        var @char = line[i];
-                        line.RemoveAt(i);
-
-                        line.Insert(FindOperatorPosition(i, line, true), @char);
-                        break;
-                }
-            }
-        }
-
 
         private static void InsertOrderOfOperationsBraces(List<char> line)
         {
