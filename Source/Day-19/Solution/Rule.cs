@@ -77,25 +77,24 @@
 
         internal IEnumerable<ReadOnlyMemory<char>> Matches(ReadOnlyMemory<char> line, int ownId, Dictionary<int, Rule> rules)
         {
+            var listA = new List<ReadOnlyMemory<char>>();
+            var listB = new List<ReadOnlyMemory<char>>();
+
             foreach(var branch in this.Bundles)
             {
-                var splits = new List<ReadOnlyMemory<char>>
-                {
-                    line
-                };
+                listA.Clear();
+                listB.Clear();
+                listA.Add(line);
+
+                var readList = listA;
+                var writeList = listB;
 
                 var match = true;
 
                 foreach (var symbol in branch.Symbols)
                 {
-                    if (splits.Count == 0)
-                    {
-                        break;
-                    }
-
-                    var splitsCopy = splits.ToArray();
-                    splits.Clear();
-                    foreach (var split in splitsCopy)
+                    writeList.Clear();
+                    foreach (var split in readList)
                     {
                         if (split.Length == 0)
                         {
@@ -108,18 +107,21 @@
                             case CharacterSymbol character:
                                 if (split.Span[0] == character.Character)
                                 {
-                                    splits.Add(split[1..]);
+                                    writeList.Add(split[1..]);
                                 }
                                 break;
                             case ReferenceSymbol reference:
                                 var branchSplits = rules[reference.Number].Matches(split, reference.Number, rules).ToArray();
                                 if (branchSplits.Length > 0)
                                 {
-                                    splits.AddRange(branchSplits);
+                                    writeList.AddRange(branchSplits);
                                 }
                                 break;
                         }
                     }
+
+                    readList = readList == listA ? listB : listA;
+                    writeList = writeList == listA ? listB : listA;
 
                     if (!match)
                     {
@@ -127,9 +129,9 @@
                     }
                 }
 
-                if (splits.Count > 0)
+                if (readList.Count > 0)
                 {
-                    foreach(var split in splits)
+                    foreach(var split in readList)
                     {
                         yield return split;
                     }

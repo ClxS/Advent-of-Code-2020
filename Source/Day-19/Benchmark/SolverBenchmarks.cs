@@ -17,15 +17,21 @@
         }
 
         [Benchmark]
-        public void Part1()
+        public void Part1NaiveParser()
         {
             Part1Solver.Solve(this.text);
         }
 
         [Benchmark]
-        public void Part2()
+        public void Part2NaiveParser()
         {
-            Part2Solver.Solve(this.text);
+            Part2NaiveParserSolver.Solve(this.text);
+        }
+
+        [Benchmark]
+        public void Part2RegexParser()
+        {
+            Part2RegexSolver.Solve(this.text);
         }
     }
 }

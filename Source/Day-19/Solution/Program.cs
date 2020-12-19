@@ -11,7 +11,8 @@ namespace Day19
             ProgramShell
                 .Run(
                     new Part1Solver(data),
-                    new Part2Solver(data));
+                    new Part2NaiveParserSolver(data),
+                    new Part2RegexSolver(data));
         }
     }
 }

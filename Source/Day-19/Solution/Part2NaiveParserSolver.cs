@@ -5,16 +5,16 @@
     using System;
     using System.Collections.Generic;
 
-    public class Part2Solver : ISolver
+    public class Part2NaiveParserSolver : ISolver
     {
         private readonly string text;
 
-        public Part2Solver(string text)
+        public Part2NaiveParserSolver(string text)
         {
             this.text = text;
         }
 
-        public string Name => "Day19 Part2";
+        public string Name => "Day19 Part2 Naive Parser";
 
         public void Solve()
         {
