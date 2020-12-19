@@ -157,6 +157,38 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ReadOnlySpan<char> ReadSymbol(bool skipToNextChar = true)
+        {
+            var dataLength = data.Length;
+            if (dataLength == 0)
+            {
+                return default;
+            }
+
+            var idx = 0;
+            while (idx < data.Length && idx + 1 < dataLength)
+            {
+                var @char = data[idx + 1];
+                if (@char == ' ' || @char == '\r')
+                {
+                    break;
+                }
+
+                idx++;
+            }
+
+            var retValue = this.data.Slice(0, idx + 1);
+
+            if (skipToNextChar)
+            {
+                ProceedToNextChar(ref idx);
+            }
+
+            data = data[(idx + 1)..];
+            return retValue;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlySpan<char> PeekWord()
         {
             var dataLength = data.Length;
